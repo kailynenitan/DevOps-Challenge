@@ -23,7 +23,7 @@ class WeatherDashboard:
             print(f"Creating bucket {self.bucket_name}")
         try:
             # Simpler creation for us-east-1
-            self.s3_client.create_bucket(Bucket=self.bucket_name)
+            self.s3_client.create_bucket(Bucket=self.bucket_name, CreateBucketConfiguration={'LocationConstraint': 'us-west-1'})
             print(f"Successfully created bucket {self.bucket_name}")
         except Exception as e:
             print(f"Error creating bucket: {e}")
@@ -73,7 +73,7 @@ def main():
     # Create bucket if needed
     dashboard.create_bucket_if_not_exists()
     
-    cities = ["Philadelphia", "Seattle", "New York"]
+    cities = ["Philadelphia", "Seattle", "New York", "San Diego"]
     
     for city in cities:
         print(f"\nFetching weather for {city}...")
