@@ -42,7 +42,7 @@ git clone https://github.com/ShaeInTheCloud/30days-weather-dashboard.git
 pip install -r requirements.txt
 ```
 
-3. Configure environment variables in .env:
+3. Configure environment variables in .env:\
 In the 30days-weather-dashboard directory:
 ```
 touch .env
