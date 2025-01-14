@@ -43,6 +43,11 @@ pip install -r requirements.txt
 ```
 
 3. Configure environment variables in .env:
+In the 30days-weather-dashboard directory:
+```
+touch .env
+```
+In the .env file:
 ```
 OPENWEATHER_API_KEY=your_api_key
 AWS_BUCKET_NAME=your_bucket_name
