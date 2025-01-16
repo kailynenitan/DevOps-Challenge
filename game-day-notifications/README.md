@@ -3,7 +3,9 @@
 ## **Project Overview**
 This project is an alert system that sends real-time NHL game day score notifications to subscribed users via SMS/Email. It leverages **Amazon SNS**, **AWS Lambda and Python**, **Amazon EvenBridge** and **NHL APIs** to provide sports fans with up-to-date game information. The project demonstrates cloud computing principles and efficient notification mechanisms.
 
-## **Features**
+This projct was built using the notification code from Day 2 of the DevOpsAllStarsChallenge https://m.youtube.com/watch?v=09WfkKc0x_Q&t=1430s&pp=2AGWC5ACAQ%3D%3D
+
+## Features
 - Fetches live NHL game scores using an external API.
 - Sends formatted score updates to subscribers via SMS/Email using Amazon SNS.
 - Scheduled automation for regular updates using Amazon EventBridge.
@@ -42,39 +44,39 @@ game-day-notifications/
 └── README.md                        # Project documentation
 ```
 
-## **Setup Instructions**
+## Setup Instructions
 
-### **Clone the Repository**
+### Clone the Repository
 ```bash
 git clone https://github.com/ifeanyiro9/game-day-notifications.git
 cd game-day-notifications
 ```
 
-### **Create an SNS Topic**
+### Create an SNS Topic
 1. Open the AWS Management Console.
 2. Navigate to the SNS service.
 3. Click Create Topic and select Standard as the topic type.
 4. Name the topic (e.g., gd_topic) and note the ARN.
 5. Click Create Topic.
 
-### **Add Subscriptions to the SNS Topic**
+### Add Subscriptions to the SNS Topic
 1. After creating the topic, click on the topic name from the list.
 2. Navigate to the Subscriptions tab and click Create subscription.
 3. Select a Protocol:
-- For Email:
-  - Choose Email.
-  - Enter a valid email address.
-- For SMS (phone number):
-  - Choose SMS.
-  - Enter a valid phone number in international format (e.g., +1234567890).
+	- For Email:
+	  - Choose Email.
+	  - Enter a valid email address.
+	- For SMS (phone number):
+	  - Choose SMS.
+	  - Enter a valid phone number in international format (e.g., +1234567890).
 
 4. Click Create Subscription.
 5. If you added an Email subscription:
-- Check the inbox of the provided email address.
-- Confirm the subscription by clicking the confirmation link in the email.
+	- Check the inbox of the provided email address.
+	- Confirm the subscription by clicking the confirmation link in the email.
 6. For SMS, the subscription will be immediately active after creation.
 
-### **Create the SNS Publish Policy**
+### Create the SNS Publish Policy
 1. Open the IAM service in the AWS Management Console.
 2. Navigate to Policies → Create Policy.
 3. Click JSON and paste the JSON policy from gd_sns_policy.json file
@@ -84,7 +86,7 @@ cd game-day-notifications
 7. Enter a name for the policy (e.g., gd_sns_policy).
 8. Review and click Create Policy.
 
-### **Create an IAM Role for Lambda**
+### Create an IAM Role for Lambda
 1. Open the IAM service in the AWS Management Console.
 2. Click Roles → Create Role.
 3. Select AWS Service and choose Lambda.
@@ -97,7 +99,7 @@ cd game-day-notifications
 8. Review and click Create Role.
 9. Copy and save the ARN of the role for use in the Lambda function.
 
-### **Deploy the Lambda Function**
+### Deploy the Lambda Function
 1. Open the AWS Management Console and navigate to the Lambda service.
 2. Click Create Function.
 3. Select Author from Scratch.
@@ -113,7 +115,7 @@ cd game-day-notifications
 9. Click Create Function.
 
 
-### **Set Up Automation with Eventbridge**
+### Set Up Automation with Eventbridge
 1. Navigate to the Eventbridge service in the AWS Management Console.
 2. Go to Rules → Create Rule.
 3. Select Event Source: Schedule.
@@ -121,7 +123,7 @@ cd game-day-notifications
 5. Under Targets, select the Lambda function (gd_notifications) and save the rule.
 
 
-### **Test the System**
+### Test the System
 1. Open the Lambda function in the AWS Management Console.
 2. Create a test event to simulate execution.
 3. Run the function and check CloudWatch Logs for errors.
