@@ -1,12 +1,10 @@
-# NBA Game Day Notifications / Sports Alerts System
+# NHL Game Day Notifications
 
 ## **Project Overview**
-This project is an alert system that sends real-time NBA game day score notifications to subscribed users via SMS/Email. It leverages **Amazon SNS**, **AWS Lambda and Python**, **Amazon EvenBridge** and **NBA APIs** to provide sports fans with up-to-date game information. The project demonstrates cloud computing principles and efficient notification mechanisms.
-
----
+This project is an alert system that sends real-time NHL game day score notifications to subscribed users via SMS/Email. It leverages **Amazon SNS**, **AWS Lambda and Python**, **Amazon EvenBridge** and **NHL APIs** to provide sports fans with up-to-date game information. The project demonstrates cloud computing principles and efficient notification mechanisms.
 
 ## **Features**
-- Fetches live NBA game scores using an external API.
+- Fetches live NHL game scores using an external API.
 - Sends formatted score updates to subscribers via SMS/Email using Amazon SNS.
 - Scheduled automation for regular updates using Amazon EventBridge.
 - Designed with security in mind, following the principle of least privilege for IAM roles.
@@ -15,24 +13,21 @@ This project is an alert system that sends real-time NBA game day score notifica
 - Free account with subscription and API Key at [sportsdata.io](https://sportsdata.io/)
 - Personal AWS account with basic understanding of AWS and Python
 
----
-
 ## **Technical Architecture**
 ![nba_API](https://github.com/user-attachments/assets/5e19635e-0685-4c07-9601-330f7d1231f9)
 
 
----
+
 
 
 ## **Technologies**
 - **Cloud Provider**: AWS
 - **Core Services**: SNS, Lambda, EventBridge
-- **External API**: NBA Game API (SportsData.io)
+- **External API**: NHL Game API (SportsData.io)
 - **Programming Language**: Python 3.x
 - **IAM Security**:
   - Least privilege policies for Lambda, SNS, and EventBridge.
 
----
 
 ## **Project Structure**
 ```bash
@@ -113,7 +108,7 @@ cd game-day-notifications
 - Copy the content of the src/gd_notifications.py file from the repository.
 - Paste it into the inline code editor.
 8. Under the Environment Variables section, add the following:
-- NBA_API_KEY: your NBA API key.
+- NHL_API_KEY: your NHL API key.
 - SNS_TOPIC_ARN: the ARN of the SNS topic created earlier.
 9. Click Create Function.
 
@@ -131,16 +126,3 @@ cd game-day-notifications
 2. Create a test event to simulate execution.
 3. Run the function and check CloudWatch Logs for errors.
 4. Verify that SMS notifications are sent to the subscribed users.
-
-
-### **What We Learned**
-1. Designing a notification system with AWS SNS and Lambda.
-2. Securing AWS services with least privilege IAM policies.
-3. Automating workflows using EventBridge.
-4. Integrating external APIs into cloud-based workflows.
-
-
-### **Future Enhancements**
-1. Add NFL score alerts for extended functionality.
-2. Store user preferences (teams, game types) in DynamoDB for personalized alerts.
-3. Implement a web UI
