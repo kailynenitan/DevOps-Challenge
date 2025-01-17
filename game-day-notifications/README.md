@@ -2,8 +2,8 @@
 
 ## **Project Overview**
 This project is an alert system that sends real-time NHL game day score notifications to subscribed users via SMS/Email. It leverages **Amazon SNS**, **AWS Lambda and Python**, **Amazon EvenBridge** and **NHL APIs** to provide sports fans with up-to-date game information. The project demonstrates cloud computing principles and efficient notification mechanisms.
-
-This projct was built using the notification code from Day 2 of the DevOpsAllStarsChallenge https://m.youtube.com/watch?v=09WfkKc0x_Q&t=1430s&pp=2AGWC5ACAQ%3D%3D
+This project was made in order to complete [Day 2 of the DevOpsAllStarsChallenge.](https://youtu.be/09WfkKc0x_Q?si=XS7auh05wy8vziPH)
+The code that this project is built from was made by Ifeanyi Otuonye at his [game-day-notifications](https://github.com/ifeanyiro9/game-day-notifications.git) repository.
 
 ## Features
 - Fetches live NHL game scores using an external API.
