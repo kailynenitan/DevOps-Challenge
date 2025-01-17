@@ -1,7 +1,8 @@
 # Weather Dashboard
 Building a weather data collection system using AWS S3 and OpenWeather API
 
-This project was built using the weather dashboard code from Day 1 of the DevOpsAllStarsChallenge https://youtu.be/A95XBJFOqjw?si=h0Q0_22oy2ROqT3u
+This project was made in order to complete Day 1 of the [DevOpsAllStarsChallenge.](https://www.youtube.com/watch?v=A95XBJFOqjw)
+The code that this project is built from was made by DeShae Lyda at her [30days-weather-dashboard](https://github.com/ShaeInTheCloud/30days-weather-dashboard.git) repository.
 
 ## Features of Dashboard
 - Fetches real-time weather data for multiple cities
