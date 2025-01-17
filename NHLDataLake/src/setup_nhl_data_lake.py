@@ -9,14 +9,14 @@ import os
 load_dotenv()
 
 # AWS configurations
-region = "us-east-1"  # Replace with your preferred AWS region
+region = "us-west-1"  # Replace with your preferred AWS region
 bucket_name = "sports-analytics-data-lake"  # Change to a unique S3 bucket name
-glue_database_name = "glue_nba_data_lake"
+glue_database_name = "glue_nhl_data_lake"
 athena_output_location = f"s3://{bucket_name}/athena-results/"
 
 # Sportsdata.io configurations (loaded from .env)
 api_key = os.getenv("SPORTS_DATA_API_KEY")  # Get API key from .env
-nba_endpoint = os.getenv("NBA_ENDPOINT")  # Get NBA endpoint from .env
+nhl_endpoint = os.getenv("NHL_ENDPOINT")  # Get NBA endpoint from .env
 
 # Create AWS clients
 s3_client = boto3.client("s3", region_name=region)
@@ -26,7 +26,7 @@ athena_client = boto3.client("athena", region_name=region)
 def create_s3_bucket():
     """Create an S3 bucket for storing sports data."""
     try:
-        if region == "us-east-1":
+        if region == "us-west-1":
             s3_client.create_bucket(Bucket=bucket_name)
         else:
             s3_client.create_bucket(
@@ -43,7 +43,7 @@ def create_glue_database():
         glue_client.create_database(
             DatabaseInput={
                 "Name": glue_database_name,
-                "Description": "Glue database for NBA sports analytics.",
+                "Description": "Glue database for NHL sports analytics.",
             }
         )
         print(f"Glue database '{glue_database_name}' created successfully.")
@@ -51,15 +51,15 @@ def create_glue_database():
         print(f"Error creating Glue database: {e}")
 
 def fetch_nba_data():
-    """Fetch NBA player data from sportsdata.io."""
+    """Fetch NHL player data from sportsdata.io."""
     try:
         headers = {"Ocp-Apim-Subscription-Key": api_key}
-        response = requests.get(nba_endpoint, headers=headers)
+        response = requests.get(nhl_endpoint, headers=headers)
         response.raise_for_status()  # Raise an error for bad status codes
-        print("Fetched NBA data successfully.")
+        print("Fetched NHL data successfully.")
         return response.json()  # Return JSON response
     except Exception as e:
-        print(f"Error fetching NBA data: {e}")
+        print(f"Error fetching NHL data: {e}")
         return []
 
 def convert_to_line_delimited_json(data):
@@ -68,13 +68,13 @@ def convert_to_line_delimited_json(data):
     return "\n".join([json.dumps(record) for record in data])
 
 def upload_data_to_s3(data):
-    """Upload NBA data to the S3 bucket."""
+    """Upload NHL data to the S3 bucket."""
     try:
         # Convert data to line-delimited JSON
         line_delimited_data = convert_to_line_delimited_json(data)
 
         # Define S3 object key
-        file_key = "raw-data/nba_player_data.jsonl"
+        file_key = "raw-data/nhl_player_data.jsonl"
 
         # Upload JSON data to S3
         s3_client.put_object(
@@ -92,7 +92,7 @@ def create_glue_table():
         glue_client.create_table(
             DatabaseName=glue_database_name,
             TableInput={
-                "Name": "nba_players",
+                "Name": "nhl_players",
                 "StorageDescriptor": {
                     "Columns": [
                         {"Name": "PlayerID", "Type": "int"},
@@ -112,7 +112,7 @@ def create_glue_table():
                 "TableType": "EXTERNAL_TABLE",
             },
         )
-        print(f"Glue table 'nba_players' created successfully.")
+        print(f"Glue table 'nhl_players' created successfully.")
     except Exception as e:
         print(f"Error creating Glue table: {e}")
 
@@ -120,7 +120,7 @@ def configure_athena():
     """Set up Athena output location."""
     try:
         athena_client.start_query_execution(
-            QueryString="CREATE DATABASE IF NOT EXISTS nba_analytics",
+            QueryString="CREATE DATABASE IF NOT EXISTS nhl_analytics",
             QueryExecutionContext={"Database": glue_database_name},
             ResultConfiguration={"OutputLocation": athena_output_location},
         )
@@ -130,13 +130,13 @@ def configure_athena():
 
 # Main workflow
 def main():
-    print("Setting up data lake for NBA sports analytics...")
+    print("Setting up data lake for NHL sports analytics...")
     create_s3_bucket()
     time.sleep(5)  # Ensure bucket creation propagates
     create_glue_database()
     nba_data = fetch_nba_data()
     if nba_data:  # Only proceed if data was fetched successfully
-        upload_data_to_s3(nba_data)
+        upload_data_to_s3(nhl_data)
     create_glue_table()
     configure_athena()
     print("Data lake setup complete.")
