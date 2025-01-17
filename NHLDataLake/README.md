@@ -48,18 +48,31 @@ S3: s3:CreateBucket, s3:PutObject, s3:DeleteBucket, s3:ListBucket
 Glue: glue:CreateDatabase, glue:CreateTable, glue:DeleteDatabase, glue:DeleteTable
 Athena: athena:StartQueryExecution, athena:GetQueryResults
 
+# Configuration
+### Configuring Environment Variables
+1. Within src/ create a .env file using the touch command
+```
+touch .env
+```
+2. Within the .env file, create a SPORTS_DATA_API_KEY and NHL_ENDPOINT
+```
+SPORTS_DATA_API_KEY=your api key here
+NHL_ENDPOINT=https://api.sportsdata.io/v3/nhl/scores/json/Players
+```
+
 # Running the Scripts
 ### Creating the Data Lake
 ```
 python3 setup_nhl_data_lake.py
 ```
-This command creates all of the resources required for the data lake.
+This command creates all of the resources required for the data lake. This command must be run in src/.
 You should see the resources were successfully created, the sample data was uploaded successfully and the Data Lake Setup Completed.
 
 ### Deleting the Data Lake
 ```
 python3 delete_aws_resources
 ```
+Run this command in the parent directory. 
 This command deletes all of the resources that were created in order to make the data lake.
 
 # Manually Checking Resources
