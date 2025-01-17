@@ -16,7 +16,7 @@ athena_output_location = f"s3://{bucket_name}/athena-results/"
 
 # Sportsdata.io configurations (loaded from .env)
 api_key = os.getenv("SPORTS_DATA_API_KEY")  # Get API key from .env
-nhl_endpoint = os.getenv("NHL_ENDPOINT")  # Get NBA endpoint from .env
+nhl_endpoint = os.getenv("NHL_ENDPOINT")  # Get NHL endpoint from .env
 
 # Create AWS clients
 s3_client = boto3.client("s3", region_name=region)
@@ -50,7 +50,7 @@ def create_glue_database():
     except Exception as e:
         print(f"Error creating Glue database: {e}")
 
-def fetch_nba_data():
+def fetch_nhl_data():
     """Fetch NHL player data from sportsdata.io."""
     try:
         headers = {"Ocp-Apim-Subscription-Key": api_key}
@@ -134,8 +134,8 @@ def main():
     create_s3_bucket()
     time.sleep(5)  # Ensure bucket creation propagates
     create_glue_database()
-    nba_data = fetch_nba_data()
-    if nba_data:  # Only proceed if data was fetched successfully
+    nhl_data = fetch_nhl_data()
+    if nhl_data:  # Only proceed if data was fetched successfully
         upload_data_to_s3(nhl_data)
     create_glue_table()
     configure_athena()
