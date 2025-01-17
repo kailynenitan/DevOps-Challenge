@@ -49,6 +49,11 @@ Glue: glue:CreateDatabase, glue:CreateTable, glue:DeleteDatabase, glue:DeleteTab
 Athena: athena:StartQueryExecution, athena:GetQueryResults
 
 # Configuration
+### Clone the Repository
+```
+git clone https://github.com/alahl1/NBADataLake.git
+```
+
 ### Configuring Environment Variables
 1. Within src/ create a .env file using the touch command
 ```
