@@ -14,7 +14,7 @@ The setup_nhl_data_lake.py script performs the following actions:
 ```
 NHLDataLake/
 |-- src/
-|   |-- .env
+|   |-- .env                     # This file is created by the user
 |   |-- setup_nhl_data_lake.py
 |-- policies/
 |   |-- IAM_Role
